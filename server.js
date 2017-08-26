@@ -18,7 +18,7 @@ app.use(cors());
 
 /** this project needs a db !! **/
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MLAB_URI);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 const urlSchema = mongoose.Schema({ url: String });
