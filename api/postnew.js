@@ -6,7 +6,7 @@ const shortId = require('short-mongo-id');
 const dns = require("dns");
 const url = require('url');
 
-router.post("/new", (req, res) => {
+router.post("/", (req, res) => {
   let postedUrl = req.body.url;
   Url.findOne({ url: postedUrl }, (err, doc) => {
     if (err) {
@@ -16,7 +16,7 @@ router.post("/new", (req, res) => {
     if (doc) { // Found
       res.json({
         original_url: doc.url,
-        short_url: doc.sid
+        short_url: "https://miniurl.glitch.me/mini/"+doc.sid
       });
     } else {
       let urlObj = url.parse(postedUrl);
@@ -38,26 +38,12 @@ router.post("/new", (req, res) => {
             }
             res.json({
               original_url: newUrl.url,
-              short_url: savedUrl.sid
+              short_url: "https://miniurl.glitch.me/mini/"+savedUrl.sid
             });
             console.log('savedUser: ', savedUrl);
           });
         }
       });
-    }
-  });
-});
-
-router.get("/:sid", function(req, res) {
-  Url.findOne({ sid: req.params.sid }, (err, doc) => {
-    if (err) {
-      res.send(err.message);
-      return;
-    }
-    if (doc) { // Found
-      let urlObj = url.parse(doc.url);
-      let prefix = urlObj.protocol ? '' : 'http://';
-      res.redirect(prefix + doc.url);
     }
   });
 });

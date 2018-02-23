@@ -15,7 +15,7 @@
 		"short-mongo-id": "^0.1.1"
 	},
 	"engines": {
-		"node": "4.4.5"
+		"node": "8.9.4"
 	},
 	"repository": {
 		"type": "git",
